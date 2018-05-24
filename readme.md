@@ -24,7 +24,7 @@ docker run -it --rm -u "$(id -u):$(id -g)" -v "$PWD":/app -w /app composer creat
 
 Running commands with Composer
 ```
-docker run -it --rm -u "$(id -u):$(id -g)" -v "$PWD"/app:/app -w /app composer require prettus/l5-repository
+docker run -it --rm -u "$(id -u):$(id -g)" -v "$PWD":/app -w /app composer require prettus/l5-repository
 ```
 
 Running commands in project
