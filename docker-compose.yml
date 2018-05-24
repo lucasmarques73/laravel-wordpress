@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+        php:
+           build: docker
+           container_name: my-php
+           volumes:
+              - ./app:/app
+           expose:
+            - 9000
+
+        nginx:
+           image: nginx:latest
+           container_name: my-nginx
+           ports:
+              - 80:80
+           volumes:
+              - ./docker/nginx:/etc/nginx/conf.d
+              - ./docker/logs:/var/log/nginx
+           links:
+              - php
+              
+        composer:
+           image: composer
+           volumes:
+              - ./app:/app
+
+        database:
+           container_name: my-database
+           image: postgres
+           ports:
+             - "5432:5432"
+           environment:
+              - "POSTGRES_DB: postgres"
+              - "POSTGRES_USER: postgres"
+              - "POSTGRES_PASSWORD: postgres"
+
+        adminer:
+           container_name: my-adminer
+           image: adminer
+           ports:
+              - 8080:8080
